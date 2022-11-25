@@ -3,9 +3,9 @@ from pprint import pprint
 file_path = "recipes.txt"
 
 
-def make_cook_book(menu="recipes.txt"):
+def make_cook_book(file_path):
     cook_book = {}
-    with open(menu, encoding='utf-8') as file:
+    with open(file_path, encoding='utf-8') as file:
         for line in file:
             dish_name = line.strip()
             count = int(file.readline())
@@ -23,7 +23,7 @@ def make_cook_book(menu="recipes.txt"):
 
 def get_shop_list_by_dishes(dishes, person_count):
     ingridient_list = dict()
-    cook_book = make_cook_book()
+    cook_book = make_cook_book(file_path)
 
     for dish_name in dishes:
         if dish_name in cook_book:
@@ -43,5 +43,11 @@ def get_shop_list_by_dishes(dishes, person_count):
     return ingridient_list
 
 
+print("Список блюд:", "\n")
 pprint(make_cook_book(file_path))
-pprint(get_shop_list_by_dishes(['Запеченный картофель', 'Омлет'], 22))
+print("\n")
+
+dish_need = input("Укажите выбранные блюда через запятую: ").split(', ')
+persons = int(input("Введите количество порций: "))
+
+pprint(get_shop_list_by_dishes(dish_need, persons))
